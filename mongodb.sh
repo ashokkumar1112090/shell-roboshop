@@ -6,7 +6,7 @@ Y="\e[33m"
 N="\e[0m"
 LOGS_FOLDER="/var/log/shell-roboshop"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 )
-LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" #means /var/log/shell-practice/16-logs.log
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" #means /var/log/shell-roboshop/mongodb.log
 
 mkdir -p $LOGS_FOLDER
 echo "script start executed at: $(date)" | tee -a $LOG_FILE  # echo printed one to APPEND in log file
@@ -37,7 +37,7 @@ VALIDATE $? "enable mongodb"
 systemctl start mongod &>>$LOG_FILE
 VALIDATE $? "Start mongodb" 
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongo.confg
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.confg
 VALIDATE $? "allowing remote connection to mongodb"
 
 systemctl restart mongodb
