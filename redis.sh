@@ -6,7 +6,7 @@ Y="\e[33m"
 N="\e[0m"
 LOGS_FOLDER="/var/log/shell-roboshop"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 )
-LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" #means /var/log/shell-roboshop/mongodb.log
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" #means /var/log/shell-roboshop/redis.log
 START_TIME=$(date +%s)
 
 mkdir -p $LOGS_FOLDER
