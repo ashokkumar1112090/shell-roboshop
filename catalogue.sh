@@ -48,13 +48,16 @@ fi
 mkdir -p /app &>>$LOG_FILE
 VALIDATE $? "creating app"
 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
+curl -s -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip #hide progress still shows error (sS)
 VALIDATE $? "downloaded code"
 
 cd /app 
 VALIDATE $? "changing directory to app "
 
-unzip /tmp/catalogue.zip
+rm -rf /app/*
+VALIDATE $? "Removing existing code"  #idempotent (2nd time) if code already there delete it
+
+unzip -qq /tmp/catalogue.zip #tohide archieve summary qq used
 VALIDATE $? "unzipped code"
 
 npm install &>>$LOG_FILE
