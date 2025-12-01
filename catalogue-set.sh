@@ -1,8 +1,10 @@
 #!/bin/bash
 #remove validate and test
 #to know the error occured in which line or which cmd we use
+
 set -euo pipefail #if error comes dont mask give total info of error (default line in ss
 trap 'echo "There is an error in $LINENO, Command is: $BASH_COMMAND"' ERR
+#in result it didnt print log direct error only it prints
 
 USERID=$(id -u)
 R="\e[31m"
@@ -73,6 +75,7 @@ cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service #$SCRIPT_
 
 systemctl daemon-reload
 systemctl enable catalogue &>>$LOG_FILE
+#if you want t understand littlebit flow you can give echo statement below imp cmnds install restart
 
 
 systemctl start catalogue &>>$LOG_FILE
