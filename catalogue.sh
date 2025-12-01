@@ -79,7 +79,10 @@ VALIDATE $? "Copy mongo repo"
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Install MongoDB client"
 
-INDEX=$(mongosh mongodb.ashokking.sbs --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')")
+INDEX=$(mongosh mongodb.ashokking.sbs --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')")   #script idempotent bcz 2nd time again we dont load here that is cmd
+#google shellscript cmd to check mongodb collection exist
+#less than 0 here bcz if not there it shows -1 if ther its hows greater than 0
+#index varb bcz it represent index of cat products 
 if [ $INDEX -le 0 ]; then
     mongosh --host $MONGODB_HOST </app/db/master-data.js &>>$LOG_FILE
     VALIDATE $? "Load catalogue products"
@@ -90,6 +93,8 @@ fi
 systemctl restart catalogue
 VALIDATE $? "Restarted catalogue"
 
+#refer 19-set.sh in shell practcie basics folder you will know usage of set
+#refer catalogue-set.sh folder
 
 
 
