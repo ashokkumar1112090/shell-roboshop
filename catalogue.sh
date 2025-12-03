@@ -59,6 +59,7 @@ VALIDATE $? "Removing existing code"  #idempotent (2nd time) if code already the
 
 unzip -qq /tmp/catalogue.zip #tohide archieve summary qq used
 VALIDATE $? "unzipped code"
+cd /app
 
 npm install &>>$LOG_FILE
 VALIDATE $? "Install dependencies"
